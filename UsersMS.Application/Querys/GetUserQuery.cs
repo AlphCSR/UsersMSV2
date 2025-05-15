@@ -12,6 +12,8 @@ namespace UsersMS.Application.Queries
     {
         public Guid UserId { get; set; }
 
+        public GetUserQuery() { }
+
         public GetUserQuery(Guid userId)
         {
             UserId = userId;

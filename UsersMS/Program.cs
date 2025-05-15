@@ -63,6 +63,8 @@ builder.Services.AddSingleton<MongoDbContext>();
 builder.Services.AddMassTransit(x =>
 {
     x.AddConsumer<UserCreatedConsumer>();
+    x.AddConsumer<UserUpdatedConsumer>();
+    x.AddConsumer<UserDeletedConsumer>();
 
     x.UsingRabbitMq((context, cfg) =>
     {
@@ -74,6 +76,14 @@ builder.Services.AddMassTransit(x =>
         cfg.ReceiveEndpoint("user-created-queue", e =>
         {
             e.ConfigureConsumer<UserCreatedConsumer>(context);
+        });
+        cfg.ReceiveEndpoint("user-updated-queue", e =>
+        {
+            e.ConfigureConsumer<UserUpdatedConsumer>(context);
+        });
+        cfg.ReceiveEndpoint("user-deleted-queue", e =>
+        {
+            e.ConfigureConsumer<UserDeletedConsumer>(context);
         });
     });
 });

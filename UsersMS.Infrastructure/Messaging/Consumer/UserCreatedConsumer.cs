@@ -1,4 +1,4 @@
-﻿using MassTransit;
+using MassTransit;
 using UsersMS.Domain.Entities;
 using UsersMS.Infrastructure.DataBase;
 using UsersMS.Commons.Events;

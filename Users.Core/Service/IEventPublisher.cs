@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,5 +10,7 @@ namespace UsersMS.Core.Service
     public interface IEventPublisher
     {
         Task PublishUserCreatedAsync(User user);
+        Task PublishUserUpdatedAsync(User user);
+        Task PublishUserDeletedAsync(User user);
     }
 }

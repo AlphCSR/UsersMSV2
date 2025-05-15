@@ -13,7 +13,7 @@ namespace UsersMS.Infrastructure.Repositories
         private readonly string _baseUrl;
         private readonly string _realm;
 
-        public KeycloakService(HttpClient httpClient, IConfiguration configuration)
+        public KeycloakService(HttpClient httpClient, IConfiguration configuration, object value)
         {
             _httpClient = httpClient;
             _configuration = configuration;

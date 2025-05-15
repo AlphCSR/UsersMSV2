@@ -1,9 +1,7 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
 using MediatR;
 using UsersMS.Application.Commands;
 using UsersMS.Core.Repositories;
+using UsersMS.Core.Service;
 
 namespace UsersMS.Application.Handlers.Commands
 {
@@ -11,11 +9,13 @@ namespace UsersMS.Application.Handlers.Commands
     {
         private readonly IUserRepository _userRepository;
         private readonly IKeycloakService _keycloakService;
+        private readonly IEventPublisher _eventPublisher;
 
-        public DeleteUserCommandHandler(IUserRepository userRepository, IKeycloakService keycloakService)
+        public DeleteUserCommandHandler(IUserRepository userRepository, IKeycloakService keycloakService, IEventPublisher eventPublisher)
         {
             _userRepository = userRepository;
             _keycloakService = keycloakService;
+            _eventPublisher = eventPublisher;
         }
 
         public async Task<string> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
@@ -32,7 +32,7 @@ namespace UsersMS.Application.Handlers.Commands
             var token = await _keycloakService.GetAdminTokenAsync();
             await _keycloakService.DisableUserAsync(user.Email, token);
             await _userRepository.DeleteAsync(userId);
-
+            await _eventPublisher.PublishUserDeletedAsync(user);
             return "User successfully disabled.";
         }
     }
