@@ -42,7 +42,7 @@ namespace UsersMS.Test.UsersMS.Infrastructure.Test
                 });
             var httpClient = GetHttpClient(handler.Object);
             var config = GetMockConfig();
-            var service = new KeycloakService(httpClient, config.Object, new object());
+            var service = new KeycloakService(httpClient, config.Object);
 
             // Act
             var token = await service.GetAdminTokenAsync();
@@ -62,7 +62,7 @@ namespace UsersMS.Test.UsersMS.Infrastructure.Test
                 });
             var httpClient = GetHttpClient(handler.Object);
             var config = GetMockConfig();
-            var service = new KeycloakService(httpClient, config.Object, new object());
+            var service = new KeycloakService(httpClient, config.Object);
             await Assert.ThrowsAsync<Exception>(() => service.GetAdminTokenAsync());
         }
 
@@ -77,7 +77,7 @@ namespace UsersMS.Test.UsersMS.Infrastructure.Test
                 });
             var httpClient = GetHttpClient(handler.Object);
             var config = GetMockConfig();
-            var service = new KeycloakService(httpClient, config.Object, new object());
+            var service = new KeycloakService(httpClient, config.Object);
             await service.CreateUserAsync(new { Email = "a@b.com" }, "tok");
         }
 
@@ -92,7 +92,7 @@ namespace UsersMS.Test.UsersMS.Infrastructure.Test
                 });
             var httpClient = GetHttpClient(handler.Object);
             var config = GetMockConfig();
-            var service = new KeycloakService(httpClient, config.Object, new object());
+            var service = new KeycloakService(httpClient, config.Object);
             await Assert.ThrowsAsync<Exception>(() => service.CreateUserAsync(new { Email = "a@b.com" }, "tok"));
         }
 
@@ -108,7 +108,7 @@ namespace UsersMS.Test.UsersMS.Infrastructure.Test
                 });
             var httpClient = GetHttpClient(handler.Object);
             var config = GetMockConfig();
-            var service = new KeycloakService(httpClient, config.Object, new object());
+            var service = new KeycloakService(httpClient, config.Object);
             await Assert.ThrowsAsync<Exception>(() => service.AssignRoleAsync("nouser", "role", "tok"));
         }
 
@@ -128,7 +128,7 @@ namespace UsersMS.Test.UsersMS.Infrastructure.Test
                 });
             var httpClient = GetHttpClient(handler.Object);
             var config = GetMockConfig();
-            var service = new KeycloakService(httpClient, config.Object, new object());
+            var service = new KeycloakService(httpClient, config.Object);
             await Assert.ThrowsAsync<Exception>(() => service.AssignRoleAsync("user", "role", "tok"));
         }
 
@@ -152,7 +152,7 @@ namespace UsersMS.Test.UsersMS.Infrastructure.Test
                 });
             var httpClient = GetHttpClient(handler.Object);
             var config = GetMockConfig();
-            var service = new KeycloakService(httpClient, config.Object, new object());
+            var service = new KeycloakService(httpClient, config.Object);
             await Assert.ThrowsAsync<Exception>(() => service.AssignRoleAsync("user", "role", "tok"));
         }
     }
