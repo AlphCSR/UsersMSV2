@@ -12,8 +12,8 @@ using UsersMS.Infrastructure.DataBase;
 namespace UsersMS.Infrastructure.Migrations
 {
     [DbContext(typeof(UsersDbContext))]
-    [Migration("20250512174837_InitialGuidUserMigration")]
-    partial class InitialGuidUserMigration
+    [Migration("20250522145851_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
