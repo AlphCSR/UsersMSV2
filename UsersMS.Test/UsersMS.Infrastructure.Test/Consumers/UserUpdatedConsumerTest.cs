@@ -25,10 +25,10 @@ namespace UsersMS.Test.UsersMS.Infrastructure.Test.Consumers
             var mockReplaceResult = new Mock<ReplaceOneResult>();
             mockReplaceResult.Setup(r => r.IsAcknowledged).Returns(true);
             mockReplaceResult.Setup(r => r.ModifiedCount).Returns(1);
-            mockCollection.Setup(c => c.ReplaceOneAsync(It.IsAny<FilterDefinition<UserReadModel>>(), It.IsAny<UserReadModel>(), It.IsAny<ReplaceOptions>(), It.IsAny<CancellationToken>())).ReturnsAsync(mockReplaceResult.Object);
+            mockCollection.Setup(c => c.UpdateOneAsync(It.IsAny<FilterDefinition<UserReadModel>>(), It.IsAny<UpdateDefinition<UserReadModel>>(), null, It.IsAny<CancellationToken>())).ReturnsAsync((UpdateResult)null);
             await consumer.Consume(context.Object);
             mockCollection.Verify(
-                c => c.ReplaceOneAsync(It.IsAny<FilterDefinition<UserReadModel>>(), It.IsAny<UserReadModel>(), It.IsAny<ReplaceOptions>(), It.IsAny<CancellationToken>()),
+                c => c.UpdateOneAsync(It.IsAny<FilterDefinition<UserReadModel>>(), It.IsAny<UpdateDefinition<UserReadModel>>(), null, It.IsAny<CancellationToken>()),
                 Times.Once
             );
         }

@@ -25,10 +25,10 @@ namespace UsersMS.Test.UsersMS.Infrastructure.Test.Consumers
             var mockDeleteResult = new Mock<DeleteResult>();
             mockDeleteResult.Setup(r => r.DeletedCount).Returns(1);
             mockDeleteResult.Setup(r => r.IsAcknowledged).Returns(true);
-            mockCollection.Setup(c => c.DeleteOneAsync(It.IsAny<FilterDefinition<UserReadModel>>(), It.IsAny<DeleteOptions>(), It.IsAny<CancellationToken>())).ReturnsAsync(mockDeleteResult.Object);
+            mockCollection.Setup(c => c.DeleteOneAsync(It.IsAny<FilterDefinition<UserReadModel>>(), It.IsAny<CancellationToken>())).ReturnsAsync((DeleteResult)null);
             await consumer.Consume(context.Object);
             mockCollection.Verify(
-                c => c.DeleteOneAsync(It.IsAny<FilterDefinition<UserReadModel>>(), It.IsAny<DeleteOptions>(), It.IsAny<CancellationToken>()),
+                c => c.DeleteOneAsync(It.IsAny<FilterDefinition<UserReadModel>>(), It.IsAny<CancellationToken>()),
                 Times.Once
             );
         }

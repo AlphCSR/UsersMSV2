@@ -17,6 +17,8 @@ namespace UsersMS.Infrastructure.DataBase
             _database = client.GetDatabase(dbName);
         }
 
-        public IMongoCollection<UserReadModel> Users => _database.GetCollection<UserReadModel>("Users");
+        public MongoDbContext() { }
+
+        public virtual IMongoCollection<UserReadModel> Users => _database.GetCollection<UserReadModel>("Users");
     }
 }
